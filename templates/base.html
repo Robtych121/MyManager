@@ -7,6 +7,7 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <script src="https://kit.fontawesome.com/03eed4466c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -16,10 +17,10 @@
 <body>
 {% block login-content %}{% endblock %}
 <div id="external" class="external-con">
-    <div class="row">
+    <div class="row top-header">
         <div class="col-md-6">
             {% if user.is_authenticated %}
-            <h3>MyManager - {% block app_name %}{% endblock %}</h3>
+            <h3>MyManager {% block app_name %}{% endblock %}</h3>
             {% endif %}
         </div>
         <div class="col-md-6 text-right">
@@ -32,11 +33,11 @@
         </div>
         <div class="col-md-10">
             {% include 'partials/messages.html' %}
-            <h1>{% block page_heading %}{% endblock %}</h1>
+            <h1 class="menu_section">{% block page_heading %}{% endblock %}</h1>
             {% block content %}{% endblock %}
         </div>
     </div>
-    <div class="row">
+    <div class="row footer">
         <div class="col-md-12 text-right">
             {% include 'partials/footer.html' %}
         </div>
