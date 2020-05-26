@@ -6,6 +6,7 @@
     border: 1px solid #707070;
     padding: 15px;
     background-color: white;
+    margin-top: 15px;
 }
 
 body {
@@ -17,4 +18,16 @@ body {
     padding: 15px;
     margin: 15px;
     border: 1px solid #707070;
+}
+
+.sidebar {
+    border-right: 1px solid rgba(0,0,0,.1)
+}
+
+.menu_section {
+    font-weight: bold;
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-top: 10px;
+    border-left: 5px solid black;
 }

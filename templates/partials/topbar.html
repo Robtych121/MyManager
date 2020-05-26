@@ -1,7 +1,14 @@
-
-{% if user.is_authenticated %}
-{% if request.user.is_staff %}
-<a href="/admin" target="_blank">ACP</a>
-{% endif %}
-<a href="{% url 'logout' %}">Logout</a>
-{% endif %}
+<div class="dropdown">
+    <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-user-cog"></i>
+    </a>
+  
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        {% if user.is_authenticated %}
+            {% if request.user.is_staff %}
+                <a class="dropdown-item" href="/admin" target="_blank">ACP</a>
+            {% endif %}
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        {% endif %}
+    </div>
+</div>
