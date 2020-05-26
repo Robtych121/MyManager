@@ -11,26 +11,23 @@
     <script src="{% static 'js/jquery-3.4.1.slim.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/scripts.js' %}"></script>
     {% block head_js %}{% endblock %}
     <title>MyManager - {% block page_title %}{% endblock %}</title>
 </head>
 <body>
-    
-{% include 'partials/topbar.html' %}
-<div class="external-con container">
-{% include 'partials/header.html' %}
-{% include 'partials/navigation.html' %}
-{% include 'partials/messages.html' %}
-    
-<div class="row">
-    <div class="col-12">
+<div id="external" class="external-con">
+    {% include 'partials/topbar.html' %}
+    {% include 'partials/header.html' %}
+    {% include 'partials/navigation.html' %}
+    {% include 'partials/messages.html' %}
     <h1>{% block page_heading %}{% endblock %}</h1>
     {% block content %}{% endblock %}
-    </div>
+    {% include 'partials/footer.html' %}
 </div>
-
-{% include 'partials/footer.html' %}
-</div>
+<script>
+    if ($(".login_box")[0]){
+    $('div').removeClass( "external-con" )
+}
+</script>
 </body>
 </html>

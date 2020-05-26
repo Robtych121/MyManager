@@ -4,11 +4,17 @@
     margin-left: auto;
     margin-right: auto;
     border: 1px solid #707070;
-    border-radius: 10px;
     padding: 15px;
     background-color: white;
 }
 
 body {
     background: url('../img/prism.png');
+}
+
+.external-con {
+    background-color: white;
+    padding: 15px;
+    margin: 15px;
+    border: 1px solid #707070;
 }
