@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block page_title %}{{ task_list.name }}{% endblock %}
+{% block page_heading%}<span>{{ task_list.name }}</span><span id="list_options_con"></span>{% endblock %}
+
+{% block content %}
+{% for task_list_user in task_list_users %}
+    {% if task_list_user.list_id == task_list.id and task_list_user.perm_view == 'Yes'  %}
+<div class="task-list-container">
+{% for task in tasks %}
+<a class="TaskContainer" href="{% url 'edit_task' task.id %}">
+    <div class="card TaskContainerInternal">
+        <div class="card-body task_list">
+        <table class="col-12">
+            <tr>
+                <td style="width: 20px;">
+                    <form action="{% url 'set_completed_from_list' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <label class="container">
+                            <input class="form-check-input position-static" type="checkbox" name="completed{{task.id}}" id="completed{{task.id}}" {% if task.completed == 'Yes' %}checked {% endif %}>
+                            <span class="checkmark"></span>
+                        </label>
+                    </form>
+                    <script>
+                        $(document).ready(function() {
+                            $('#completed{{task.id}}').on('change', function() {
+                                this.form.submit();
+                            });
+                        });
+                    </script>
+                </td>
+                <td>
+                    <div>
+                        <span class="TaskName">{{ task.name}}</span>
+                    </div>
+                </td>
+                <td style="width: 220px; text-align: right; padding-right: 10px;">
+                    <div class="task_extras">
+                        {{task.due_date}}  
+                        {% for user in users %}
+                            {% if task.assigned_to == user.id %}
+                                - <span class="assignedUser" data-toggle="tooltip" data-placement="top" title="{{user.first_name}} {{user.last_name}}">{{user.first_name|slice:":1"|upper}}{{user.last_name|slice:":1"|upper}}</span>
+                                <script>
+                                    $(function () {
+                                        $('[data-toggle="tooltip"]').tooltip()
+                                        })
+                                </script>
+                            {% endif%}
+                        {%endfor%}
+                    </div>
+                </td>
+                <td style="width: 20px;">
+                    <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_list' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <input class="checkboxstar form-check-input position-static" type="checkbox" name="importance{{task.id}}" id="importance{{task.id}}" {% if task.importance == 'Yes' %}checked {% endif %}>
+                        <label class="checkboxlabel" for="importance{{task.id}}"></label>  
+                    </form>
+                    <script>
+                        $(document).ready(function() {
+                            $('#importance{{task.id}}').on('change', function() {
+                                this.form.submit();
+                            });
+                        });
+                    </script>
+                </td>
+            </tr>
+        </table>            
+        </div>
+    </div>
+</a>
+{% empty %}
+No Tasks Created
+{% endfor %}
+</div>
+{% if completedtasks %}
+<p id="completedtaskcontainer">
+    <a data-toggle="collapse" href="#completedtasks"aria-expanded="false" aria-controls="completedtasks">Show Completed Tasks</a>
+</p>
+{%endif %}
+<div id="completedtasks" class="task-list-container collapse">
+    {% for completedtask in completedtasks %}
+    <a class="TaskContainer" href="{% url 'edit_task' completedtask.id %}">
+        <div class="card TaskContainerInternal">
+            <div class="card-body task_list">
+            <table class="col-12">
+                <tr>
+                    <td style="width: 20px;">
+                        <form action="{% url 'set_completed_from_list' completedtask.id %}" method="POST">
+                            {% csrf_token %}
+                            <label class="container">
+                                <input class="form-check-input position-static" type="checkbox" name="completed{{completedtask.id}}" id="completed{{completedtask.id}}" {% if completedtask.completed == 'Yes' %}checked {% endif %}>
+                                <span class="checkmark"></span>
+                            </label>
+                        </form>
+                        <script>
+                            $(document).ready(function() {
+                                $('#completed{{completedtask.id}}').on('change', function() {
+                                    this.form.submit();
+                                });
+                            });
+                        </script>
+                    </td>
+                    <td>
+                        <div>
+                            <span class="TaskName">{{ completedtask.name}}</span>
+                        </div>
+                    </td>
+                    <td style="width: 60px; text-align: right; padding-right: 10px;">
+                        <div class="task_extras">
+                            {% for user in users %}
+                                {% if completedtask.assigned_to == user.id %}
+                                    {{user.username}}
+                                {% endif%}
+                            {%endfor%}
+                        </div>
+                    </td>
+                    <td style="width: 20px;">
+                        <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_list' completedtask.id %}" method="POST">
+                            {% csrf_token %}
+                            <input class="checkboxstar form-check-input position-static" type="checkbox" name="importance{{completedtask.id}}" id="importance{{completedtask.id}}" {% if completedtask.importance == 'Yes' %}checked {% endif %}>
+                            <label class="checkboxlabel" for="importance{{completedtask.id}}"></label>  
+                            </form>
+                        <script>
+                            $(document).ready(function() {
+                                $('#importance{{completedtask.id}}').on('change', function() {
+                                    this.form.submit();
+                                });
+                            });
+                        </script>
+                    </td>
+                </tr>
+            </table>            
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    No Completed Tasks
+    {% endfor %}
+    </div>
+
+
+<hr>
+{% for task_list_user in task_list_users %}
+    {% if task_list_user.list_id == task_list.id and task_list_user.perm_add == 'Yes'  %}
+        <div class="enter-task-container">
+            <form action="{% url 'create_new_task_post' %}" method="POST">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <input type="hidden" name="new_task_list_id" id="id_new_task_list_id" value="{{ task_list.id }}">
+                    <input type="hidden" name="new_task_list_user" id="id_new_task_list_user" value="{{ user.id }}">
+                    <input type="text" class="form-control" id="id_new_task" name="new_task" placeholder="Start typing.." aria-label="Recipient's username" aria-describedby="button-addon2" required>
+                    <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit" id="button-addon2">Add Task</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+{% endfor %}
+<div id="task_list_options_container">
+    <div class="dropdown">
+        <a class="btn btn-secondary btn-sm dropdown-toggle btn-settings" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-cogs"></i>
+        </a>
+      
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+            {% if user.is_authenticated %}
+            {% for task_list_user in task_list_users %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_edit == 'Yes'  %}
+                <a class="dropdown-item" href="{% url 'edit_task_list' task_list.id %}">Edit</a>
+                {% endif %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_edit == 'No'  %}
+                <a class="dropdown-item disabled" href="">Edit</a>
+                {% endif %}
+            {% endfor %}
+            <div class="dropdown-divider"></div>
+            {% for task_list_user in task_list_users %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_delete == 'Yes'  %}
+                <a class="dropdown-item" href="" data-toggle="modal" data-target="#DeleteListModal">Delete</a>
+                {% endif %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_delete == 'No'  %}
+                <a class="dropdown-item disabled" href="">Delete</a>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+</div>
+</div>
+
+<div class="modal fade" id="DeleteListModal" tabindex="-1" role="dialog" aria-labelledby="DeleteListModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="DeleteListModalLabel">Are you sure?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>This action cannot be reversed once completed. All Associated tasks will also be deleted.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <a href="{% url 'delete_task_list_post' task_list.id %}" class="btn btn-success">Confirm Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+    
+    $(document).ready(function() {
+        // Appends the options container to the page title area
+        if($('#task_list_options_container')) {
+            list_options_con.appendChild(task_list_options_container);
+        }
+
+        // when 'importance' checkbox is changed, submit the form
+        $('#importance').on('change', function() {
+            this.form.submit();
+        });
+    });
+</script>
+
+{% endif %}
+{% endfor %}
+{% endblock %}

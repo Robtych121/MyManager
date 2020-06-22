@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+
+{% block page_title %}Manage Task Lists{% endblock %}
+{% block page_heading%}Manage Task Lists{% endblock %}
+
+{% block content %}
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Parent List</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for task_list in task_lists %}
+        {% for task_list_user in task_list_users %}
+      {% if task_list_user.user_id == request.user.id and task_list_user.list_id == task_list.id and task_list_user.perm_view == 'Yes' %}
+      <tr>
+        <td>{{ task_list.id }}</td>
+        <td>{{ task_list.name }}</td>
+        <td>{{ task_list.type }}</td>
+        <td>
+          {% for task_listname in task_listnames%}
+            {% if task_listname.id == task_list.parent_list%}
+              {{ task_listname.name }}
+            {% endif %}
+          {% endfor %}
+        </td>
+        <td>
+            <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+              {% for task_list_user in task_list_users %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_delete == 'Yes'  %}
+                <a type="button" href="{% url 'delete_task_list_post_manage' task_list.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            {% endfor %}
+            {% for task_list_user in task_list_users %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_edit == 'Yes'  %}
+                <a type="button" href="{% url 'edit_task_list_manage' task_list.id %}" class="btn btn-info">Edit</a>
+                {% endif %}
+            {% endfor %}
+            {% if task_list.list_owner == request.user.id %}
+            <a type="button" href="{% url 'view_task_list_users' task_list.id %}" class="btn btn-success">Users</a>
+            {% endif %}
+            </div>
+        </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      {% empty %}
+      <p>No Lists Created</p>
+      
+      {% endfor %}
+            
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

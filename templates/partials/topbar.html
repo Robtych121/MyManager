@@ -1,14 +1,22 @@
-<div class="dropdown">
-    <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-user-cog"></i>
-    </a>
-  
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+<ul class="nav nav-pills justify-content-end">
+    <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#"><i class="far fa-money-bill-alt"></i></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'taskhome' %}"><i class="fas fa-tasks"></i></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i></a>
+      <div class="dropdown-menu">
         {% if user.is_authenticated %}
             {% if request.user.is_staff %}
                 <a class="dropdown-item" href="/admin" target="_blank">ACP</a>
             {% endif %}
             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
         {% endif %}
-    </div>
-</div>
+      </div>
+    </li>
+  </ul>

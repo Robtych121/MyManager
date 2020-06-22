@@ -1,6 +1,6 @@
 .login_box {
     text-align: center;
-    width: 500px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
     border: 1px solid #707070;
@@ -11,12 +11,13 @@
 
 body {
     background: url('../img/prism.png');
+    height: 100%;
+    padding: 15px;
 }
 
 .external-con {
     background-color: white;
     padding: 15px;
-    margin: 15px;
     border: 1px solid #707070;
 }
 
@@ -25,6 +26,15 @@ body {
 }
 
 .menu_section {
+    font-weight: bold;
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.title_section {
     font-weight: bold;
     background-color: #f7f7f7;
     padding: 10px;
@@ -45,4 +55,187 @@ body {
 
 .nav-pills .nav-link {
     border-radius: 0px;
+}
+
+.btn {
+    border-radius: 0px;
+}
+
+.form-control {
+    border-radius: 0px;
+}
+
+.nav-link {
+    color: #000;
+    background-color: #f7f7f7;
+    font-weight: bold;
+    border-left: 5px solid #C41230;
+    margin-bottom: 10px;
+    background-image: linear-gradient(to left,
+                                      transparent,
+                                      transparent 50%,
+                                      #C41230 50%,
+                                      #C41230);
+                   background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all .25s ease-in;
+}
+
+.nav-link:hover {
+    background-position: 0 0;
+    color: white;
+}
+
+.dropdown-menu {
+    border-radius: 0px;
+}
+
+.btn-settings {
+    background-color: #C41230;
+    border: none;
+}
+
+.btn-settings:hover, .btn-settings:active, .btn-settings:focus {
+    background-color: #f14949 !important;
+}
+
+.collapsedTaskList {
+    margin-left: 20px;
+}
+
+.add_list, .add_list:hover {
+    color: black;
+}
+
+a.btn-danger, a.btn-danger:hover {
+    color: white;
+}
+
+.task_extras{
+    margin-left: auto;
+    color: black;
+}
+
+.task_list {
+    display: inline-flex;
+}
+
+.card-body {
+    padding: 5px 10px;
+}
+
+.card {
+    border-radius: 0px;
+    margin-bottom: 5px;
+}
+
+.task-box {
+    background-color: #C41230;
+}
+
+.container input {position: absolute;opacity: 0;cursor: pointer;height: 0;width: 0;}
+
+.checkmark {position: absolute;top: 5px;left: 0;height: 25px;width: 25px;background-color: #eee;border: 1px solid #C41230;border-radius: 25px;}
+.container:hover input ~ .checkmark {background-color: #ccc;}
+.container input:checked ~ .checkmark {background-color: #C41230;}
+.checkmark:after {content: "";position: absolute;display: none;}
+.container input:checked ~ .checkmark:after {display: block;}
+.container .checkmark:after {left: 9px;top: 5px;width: 5px;height: 10px;border: solid white;border-width: 0 3px 3px 0;-webkit-transform: rotate(45deg);-ms-transform: rotate(45deg);transform: rotate(45deg);}
+
+#list_options_con {
+    line-height:35px;
+    float: right;
+}
+
+.dropdown-menu {
+    line-height: 25px;
+}
+
+.LogoLink, .LogoLink:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.TaskName, .TaskName:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.TaskContainer:hover {
+    text-decoration: none;
+}
+
+.TaskContainerInternal:hover {
+    background-color: #dadada;
+}
+
+.TaskContainerInternal {
+    transition: all 0.2s;
+}
+
+.checkboxlabel {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	font-size: 29px;
+    color: #c41230;
+    line-height: 29px;
+}
+.checkboxstar {  
+    display: none;  
+}
+
+.checkboxlabel:before {  
+    display: inline-block;  
+    content:"\2606";
+}
+.checkboxstar:checked + .checkboxlabel:before {
+    content:"\2605";
+}
+
+#completedtaskcontainer {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid grey; 
+    line-height: 0.1em;
+    margin: 20px 0 20px; 
+}
+
+#completedtaskcontainer a { 
+    background:#fff; 
+    padding:0 10px; 
+    color: grey;
+}
+
+#homepageheader {
+    font-weight: bold;
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-top: 10px;
+    border-left: 5px solid black;
+    color: #C41230;
+}
+
+.assignedUser {
+    background-color: grey;
+    padding: 5px;
+    border-radius: 30px;
+}
+
+.menu_clicker, .menu_clicker:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.menu_section:hover {
+    background-color: #c41230;
+    color: white;
+}
+
+.card-footer {
+    padding: 3px 10px;
+}
+
+.card-link, .card-link:hover {
+    color: white;
 }

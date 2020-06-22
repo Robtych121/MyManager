@@ -1,4 +1,5 @@
 {% if user.is_authenticated %}
+<div id="dashboard_menu">
 <p class="menu_section">Section Header</p>
 <ul class="nav nav-pills flex-column">
     <li class="nav-item">
@@ -14,4 +15,83 @@
       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
     </li>
   </ul>
+</div>
+<div id="tasks_menu">
+  <a class="menu_clicker" data-toggle="collapse" href="#yourlists" role="button" aria-expanded="false" aria-controls="yourlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Your Lists</p>
+  </a>
+  <div class="collapse" id="yourlists">
+  <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'assignedto_list' %}"><i class="fas fa-user"></i> Assigned To You</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'todaytasks_list' %}"><i class="far fa-sun"></i> Today</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'plannedtasks_list' %}"><i class="far fa-calendar-alt"></i> Planned</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'overduetasks_list' %}"><i class="far fa-clock"></i> Overdue</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'importanttasks_list' %}"><i class="fas fa-star"></i> Important</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'persontasks_list' %}"><i class="fas fa-home"></i> Tasks</a>
+      </li>
+    </ul>
+  </div>
+  <a class="menu_clicker" data-toggle="collapse" href="#sharedlists" role="button" aria-expanded="false" aria-controls="sharedlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Shared Lists</p>
+  </a>
+  <div class="collapse" id="sharedlists">
+    <ul class="nav nav-pills flex-column">
+      {% for task_list in nav_task_lists %}
+        {% for task_list_user in task_list_users %}
+        {% if task_list_user.user_id == request.user.id and task_list_user.list_id == task_list.id and task_list_user.perm_view == 'Yes' %}
+          {% if task_list.type == 'Normal' %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'view_list' task_list.id %}"><i class="fas fa-bars"></i> {{ task_list.name }}</a>
+          </li>
+          {% endif %}
+          {% if task_list.type == 'Group' %}
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#listgroup{{task_list.id}}" role="button" aria-expanded="false" aria-controls="listgroup{{task_list.id}}">
+              <i class="far fa-folder"></i> {{ task_list.name }}
+            </a>
+            <div class="collapse" id="listgroup{{task_list.id}}">
+              <ul class="nav nav-pills flex-column collapsedTaskList">
+                {% for sub_task_list in sub_task_lists %}
+                  {% if sub_task_list.parent_list == task_list.id %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_list' sub_task_list.id %}"><i class="fas fa-bars"></i> {{sub_task_list.name}}</a>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+          {% endif %}
+        {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+    <a class="add_list" href="{% url 'create_or_edit_task_list' %}"><p><i class="fas fa-plus"></i> New List</p></a>
+</div>
+
+
+
+<script>
+$( document ).ready(function() {
+  if($('#appName').html() == 'Gen'){
+    $('#tasks_menu').hide()
+  }
+  if($('#appName').html() == 'Tasks'){
+    $('#dashboard_menu').hide()
+  }
+});
+  
+</script>
 {% endif %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block page_title %}New Task List{% endblock %}
+{% block page_heading%}New Task List{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form | as_bootstrap }}
+        <div id="groupListsContainer">
+            <div class="form-group">
+                <label for="id_parent_list" class="control-label required-field ">Parent Group</label>
+                <select class="form-control" name="parent_list" id="id_parent_list">
+                    <option value="0">Please Select</option>
+                    {% for grouped_list in grouped_lists %}
+                    <option value="{{grouped_list.id}}">{{grouped_list.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-info">Save</button>
+        <a class="btn btn-danger" onclick="window.history.go(-1);">Cancel</a>
+    </form>
+
+    <script>
+        $('#id_type').change(function() {
+            var method = $('#id_type').val();
+            if(method == 'Group'){
+                $('#groupListsContainer').hide();
+                $('#id_parent_list').val("");
+            } else {
+                $('#groupListsContainer').show();
+            }
+        });
+    </script>
+{% endblock %}

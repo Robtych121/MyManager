@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block page_title %}Create Task List User{% endblock %}
+{% block page_heading%}Create Task List User{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_user_id">Select User</label>
+            <select class="form-control" id="id_user_id" name="user_id">
+                {%for listsuser in listsusers %}
+                <option value="{{ listsuser.id }}">{{ listsuser.first_name }} {{ listsuser.last_name }}</option>
+                {%endfor%}
+            </select>
+        </div>
+        {{ form | as_bootstrap }}
+        <button type="submit" class="btn btn-info">Save</button>
+        <a class="btn btn-danger" onclick="window.history.go(-1);">Cancel</a>
+    </form>
+{% endblock %}

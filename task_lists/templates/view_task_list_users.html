@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block page_title %}View User Permissions{% endblock %}
+{% block page_heading%}View User Permissions - {{tasklist.name}}{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'add_task_list_user' tasklist.id %}" class="btn btn-success">Add User</a></p>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Owner</th>
+        <th>Can View</th>
+        <th>Can Add</th>
+        <th>Can Edit</th>
+        <th>Can Delete</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for tasklistuser in tasklistusers%}
+<tr>
+    <td>
+        {% for user in users %}
+            {% if tasklistuser.user_id == user.id %}
+                {{ user.first_name }} {{ user.last_name }}
+            {%endif%}
+        {% endfor %}
+    </td>
+    <td>
+        {% for user in users %}
+            {% if tasklistuser.user_id == user.id and tasklist.list_owner == user.id %}
+                Yes
+            {%endif%}
+        {% endfor %}
+    </td>
+    <td>{{tasklistuser.perm_view}}</td>
+    <td>{{tasklistuser.perm_add}}</td>
+    <td>{{tasklistuser.perm_edit}}</td>
+    <td>{{tasklistuser.perm_delete}}</td>
+    <td>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+          <a type="button" href="{% url 'set_list_owner' tasklistuser.id %}" class="btn btn-warning">Set Owner</a>
+          <a type="button" href="{% url 'delete_task_list_user_post' tasklistuser.id %}" class="btn btn-danger">Delete</a>
+          <a type="button" href="{% url 'edit_task_list_users' tasklistuser.id %}" class="btn btn-info">Edit</a>
+      </div>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+<a href="{% url 'manage_task_lists' %}" class="btn btn-secondary">Return to Manage Lists</a>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Lists{% endblock %}
+{% block page_heading%}Your Lists{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white mb-3 task-box">
+            <div class="card-body">
+                <div style="float: left; font-size: 40pt; padding-left: 20px;">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div style="float: right;">
+                    <p class="card-text text-right" style="font-size: 20pt;">
+                        <strong>{% if assignedtocount %}{{assignedtocount}}{% else %}0{%endif%}</strong>
+                        <br>
+                        <span style="font-size: 14pt;">Tasks Assigned</span>
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer text-right"><a class="card-link" href="{% url 'assignedto_list' %}">View More <i class="far fa-caret-square-right"></i></a></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white mb-3 task-box">
+            <div class="card-body">
+                <div style="float: left; font-size: 40pt; padding-left: 20px;">
+                    <i class="far fa-sun"></i>
+                </div>
+                <div style="float: right;">
+                    <p class="card-text text-right" style="font-size: 20pt;">
+                        <strong>{% if todaycount %}{{todaycount}}{% else %}0{%endif%}</strong>
+                        <br>
+                        <span style="font-size: 14pt;">Todays Tasks</span>
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer text-right"><a class="card-link" href="{% url 'todaytasks_list' %}">View More <i class="far fa-caret-square-right"></i></a></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white mb-3 task-box">
+            <div class="card-body">
+                <div style="float: left; font-size: 40pt; padding-left: 20px;">
+                    <i class="far fa-calendar-alt"></i>
+                </div>
+                <div style="float: right;">
+                    <p class="card-text text-right" style="font-size: 20pt;">
+                        <strong>{% if futurecount %}{{futurecount}}{% else %}0{%endif%}</strong>
+                        <br>
+                        <span style="font-size: 14pt;">Planned Tasks</span>
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer text-right"><a class="card-link" href="{% url 'plannedtasks_list' %}">View More <i class="far fa-caret-square-right"></i></a></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white mb-3 task-box">
+            <div class="card-body">
+                <div style="float: left; font-size: 40pt; padding-left: 20px;">
+                    <i class="far fa-clock"></i>
+                </div>
+                <div style="float: right;">
+                    <p class="card-text text-right" style="font-size: 20pt;">
+                        <strong>{% if pastcount %}{{pastcount}}{% else %}0{%endif%}</strong>
+                        <br>
+                        <span style="font-size: 14pt;">Overdue Tasks</span>
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer text-right"><a class="card-link" href="{% url 'overduetasks_list' %}">View More <i class="far fa-caret-square-right"></i></a></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white mb-3 task-box">
+            <div class="card-body">
+                <div style="float: left; font-size: 40pt; padding-left: 20px;">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div style="float: right;">
+                    <p class="card-text text-right" style="font-size: 20pt;">
+                        <strong>{% if importancecount %}{{importancecount}}{% else %}0{%endif%}</strong>
+                        <br>
+                        <span style="font-size: 14pt;">Important Tasks</span>
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer text-right"><a class="card-link" href="{% url 'importanttasks_list' %}">View More <i class="far fa-caret-square-right"></i></a></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white mb-3 task-box">
+            <div class="card-body">
+                <div style="float: left; font-size: 40pt; padding-left: 20px;">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div style="float: right;">
+                    <p class="card-text text-right" style="font-size: 20pt;">
+                        <strong>{% if taskscount %}{{taskscount}}{% else %}0{%endif%}</strong>
+                        <br>
+                        <span style="font-size: 14pt;">Personal Tasks</span>
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer text-right"><a class="card-link" href="{% url 'persontasks_list' %}">View More <i class="far fa-caret-square-right"></i></a></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
