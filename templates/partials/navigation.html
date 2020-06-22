@@ -1,21 +1,12 @@
 {% if user.is_authenticated %}
 <div id="dashboard_menu">
-<p class="menu_section">Section Header</p>
 <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link active" href="#">Active</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      <a class="nav-link" href="#">Dashboard</a>
     </li>
   </ul>
 </div>
+
 <div id="tasks_menu">
   <a class="menu_clicker" data-toggle="collapse" href="#yourlists" role="button" aria-expanded="false" aria-controls="yourlists">
     <p class="menu_section"><i class="fas fa-layer-group"></i> Your Lists</p>
