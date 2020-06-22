@@ -1,5 +1,5 @@
 {% if user.is_authenticated %}
-<div id="dashboard_menu">
+<div id="dashboard_menu" class="menugroup">
 <ul class="nav nav-pills flex-column">
     <li class="nav-item">
       <a class="nav-link" href="#">Dashboard</a>
@@ -7,7 +7,7 @@
   </ul>
 </div>
 
-<div id="tasks_menu">
+<div id="tasks_menu" class="menugroup">
   <a class="menu_clicker" data-toggle="collapse" href="#yourlists" role="button" aria-expanded="false" aria-controls="yourlists">
     <p class="menu_section"><i class="fas fa-layer-group"></i> Your Lists</p>
   </a>
@@ -74,14 +74,15 @@
 </div>
 
 
-
 <script>
 $( document ).ready(function() {
   if($('#appName').html() == 'Gen'){
-    $('#tasks_menu').hide()
+    $('.menugroup').hide()
+    $('#dashboard_menu').show()
   }
   if($('#appName').html() == 'Tasks'){
-    $('#dashboard_menu').hide()
+    $('.menugroup').hide()
+    $('#tasks_menu').show()
   }
 });
   

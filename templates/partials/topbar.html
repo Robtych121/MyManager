@@ -1,15 +1,18 @@
-<ul class="nav nav-pills justify-content-end">
+<ul class="nav nav-pills topnav">
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-tachometer-alt"></i></a>
+        <a class="nav-link" href="{% url 'home' %}" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fas fa-tachometer-alt"></i></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#"><i class="far fa-money-bill-alt"></i></a>
+        <a class="nav-link" href="#"  data-toggle="tooltip" data-placement="bottom" title="Finances"><i class="far fa-money-bill-alt"></i></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'taskhome' %}"><i class="fas fa-tasks"></i></a>
+      <a class="nav-link" href="{% url 'taskhome' %}"  data-toggle="tooltip" data-placement="bottom" title="Tasks"><i class="fas fa-tasks"></i></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"  data-toggle="tooltip" data-placement="bottom" title="Notes"><i class="far fa-sticky-note"></i></a>
     </li>
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i></a>
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" ><i class="fas fa-user-cog"></i></a>
       <div class="dropdown-menu">
         {% if user.is_authenticated %}
             {% if request.user.is_staff %}

@@ -22,7 +22,7 @@
             <a class="LogoLink" href="{% url 'home' %}"><h3>MyManager - <span id="appName">{% block app_name %}{% endblock %}</span></h3></a>
             {% endif %}
         </div>
-        <div class="col-md-6 text-right">
+        <div class="col-md-6">
             {% include 'partials/topbar.html' %}
         </div>
     </div>
@@ -43,9 +43,12 @@
     </div> 
 </div>
 <script>
-    if ($(".login_box")[0]){
+if ($(".login_box")[0]){
     $('#external').remove()
 }
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 </script>
 </body>
 </html>
