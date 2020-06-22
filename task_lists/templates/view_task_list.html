@@ -3,6 +3,7 @@
 
 {% block page_title %}{{ task_list.name }}{% endblock %}
 {% block page_heading%}<span>{{ task_list.name }}</span><span id="list_options_con"></span>{% endblock %}
+{% block app_name %}Tasks{% endblock %}
 
 {% block content %}
 {% for task_list_user in task_list_users %}

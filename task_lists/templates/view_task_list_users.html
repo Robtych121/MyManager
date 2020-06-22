@@ -3,6 +3,7 @@
 
 {% block page_title %}View User Permissions{% endblock %}
 {% block page_heading%}View User Permissions - {{tasklist.name}}{% endblock %}
+{% block app_name %}Tasks{% endblock %}
 
 {% block content %}
 <p><a href="{% url 'add_task_list_user' tasklist.id %}" class="btn btn-success">Add User</a></p>
