@@ -74,6 +74,12 @@
 </div>
 
 
+<div id="finance_menu" class="menugroup">
+
+</div>
+
+
+
 <script>
 $( document ).ready(function() {
   if($('#appName').html() == 'Gen'){
@@ -83,6 +89,10 @@ $( document ).ready(function() {
   if($('#appName').html() == 'Tasks'){
     $('.menugroup').hide()
     $('#tasks_menu').show()
+  }
+  if($('#appName').html() == 'Finance'){
+    $('.menugroup').hide()
+    $('#finance_menu').show()
   }
 });
   
