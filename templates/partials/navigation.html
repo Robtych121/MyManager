@@ -81,7 +81,7 @@
   <div class="collapse" id="accounts">
   <ul class="nav nav-pills flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-user"></i> View Accounts</a>
+        <a class="nav-link" href="{% url 'accounts_view' %}"><i class="fas fa-user"></i> View Accounts</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Account</a>
@@ -141,6 +141,20 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Recurring</a>
+      </li>
+    </ul>
+  </div>
+
+  <a class="menu_clicker" data-toggle="collapse" href="#expenses" role="button" aria-expanded="false" aria-controls="yourlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Expenses</p>
+  </a>
+  <div class="collapse" id="expenses">
+  <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> View Expenses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Expense</a>
       </li>
     </ul>
   </div>
