@@ -42,6 +42,9 @@ class Period(models.Model):
     )
     status = models.CharField(max_length=254, choices=STATUSCHOICES, default='')
 
+    def __str__(self):
+        return self.name
+
 
 class Category(models.Model):
     class Meta:
@@ -50,6 +53,8 @@ class Category(models.Model):
 
     name = models.CharField(max_length=254, default='')
 
+    def __str__(self):
+        return self.name
 
 class Type(models.Model):
     class Meta:
@@ -58,6 +63,8 @@ class Type(models.Model):
 
     name = models.CharField(max_length=254, default='')
 
+    def __str__(self):
+        return self.name
 
 class Transcation(models.Model):
     class Meta:
@@ -78,3 +85,6 @@ class Transcation(models.Model):
     status = models.CharField(max_length=254, choices=STATUSCHOICES, default='')
     notes = models.CharField(max_length=254, default='')
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
