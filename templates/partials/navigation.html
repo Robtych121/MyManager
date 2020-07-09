@@ -74,6 +74,109 @@
 </div>
 
 
+<div id="finance_menu" class="menugroup">
+  <a class="menu_clicker" data-toggle="collapse" href="#accounts" role="button" aria-expanded="false" aria-controls="yourlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Accounts</p>
+  </a>
+  <div class="collapse" id="accounts">
+  <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'accounts_view' %}"><i class="fas fa-user"></i> View Accounts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Account</a>
+      </li>
+    </ul>
+  </div>
+
+  <a class="menu_clicker" data-toggle="collapse" href="#periods" role="button" aria-expanded="false" aria-controls="yourlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Periods</p>
+  </a>
+  <div class="collapse" id="periods">
+  <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> View Periods</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Period</a>
+      </li>
+    </ul>
+  </div>
+
+  <a class="menu_clicker" data-toggle="collapse" href="#transations" role="button" aria-expanded="false" aria-controls="yourlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Transcations</p>
+  </a>
+  <div class="collapse" id="transations">
+  <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> View Transcations</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Transcation</a>
+      </li>
+    </ul>
+  </div>
+
+  <a class="menu_clicker" data-toggle="collapse" href="#budgets" role="button" aria-expanded="false" aria-controls="yourlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Budgets</p>
+  </a>
+  <div class="collapse" id="budgets">
+  <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> View Budgets</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Budget</a>
+      </li>
+    </ul>
+  </div>
+
+  <a class="menu_clicker" data-toggle="collapse" href="#recurring" role="button" aria-expanded="false" aria-controls="yourlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Recurring</p>
+  </a>
+  <div class="collapse" id="recurring">
+  <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> View Recurring</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Recurring</a>
+      </li>
+    </ul>
+  </div>
+
+  <a class="menu_clicker" data-toggle="collapse" href="#expenses" role="button" aria-expanded="false" aria-controls="yourlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Expenses</p>
+  </a>
+  <div class="collapse" id="expenses">
+  <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> View Expenses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Expense</a>
+      </li>
+    </ul>
+  </div>
+
+  <a class="menu_clicker" data-toggle="collapse" href="#debts" role="button" aria-expanded="false" aria-controls="yourlists">
+    <p class="menu_section"><i class="fas fa-layer-group"></i> Debts</p>
+  </a>
+  <div class="collapse" id="debts">
+  <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> View Debts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Create Debt</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+
+
 <script>
 $( document ).ready(function() {
   if($('#appName').html() == 'Gen'){
@@ -83,6 +186,10 @@ $( document ).ready(function() {
   if($('#appName').html() == 'Tasks'){
     $('.menugroup').hide()
     $('#tasks_menu').show()
+  }
+  if($('#appName').html() == 'Finance'){
+    $('.menugroup').hide()
+    $('#finance_menu').show()
   }
 });
   

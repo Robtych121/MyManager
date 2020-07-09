@@ -23,4 +23,5 @@ urlpatterns = [
     path('', login_required(TemplateView.as_view(template_name='home.html')), name='home'),
     path('accounts/', include('accounts.urls')),
     path('tasks/', include('task_lists.urls')),
+    path('finance/', include('finance.urls')),
 ]
