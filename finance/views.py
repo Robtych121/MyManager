@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Account, Period
 from .forms import AccountForm
 
@@ -31,6 +31,15 @@ def create_or_edit_account(request, pk=None):
         form = AccountForm(instance=account)
     return render(request, 'accounts_new_form.html', {'form': form})
 
+
+def delete_account(request, id):
+    """
+    Deletes the selected account
+    """
+    account = Account.objects.get(pk=id)
+    account.delete()
+
+    return redirect('accounts_view')
 
 
 def periods_view(request):
