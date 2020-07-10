@@ -6,6 +6,7 @@ urlpatterns = [
     path('', homepage, name="financehome"),
     path('view_accounts/', accounts_view, name="accounts_view"),
     path('view_periods/', periods_view, name="periods_view"),
-    path('create_or_edit_account/', create_or_edit_account, name="create_or_edit_account"),
+    path('create_account/', create_or_edit_account, name="create_or_edit_account"),
+    path('edit_account/<int:pk>', create_or_edit_account, name="create_or_edit_account"),
     path('delete_account/<int:id>', delete_account, name="delete_account"),
 ]
