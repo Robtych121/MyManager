@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Account, Period, Transcation
 from .forms import AccountForm
+from django.db.models import Sum
 
 # Create your views here.
 def homepage(request):
@@ -51,6 +52,30 @@ def view_detailed_account(request, id):
     transcations = Transcation.objects.filter(account=id).order_by('date')
 
     return render(request, 'accounts_detailed_view.html', {'account': account, 'transcations': transcations})
+
+
+def update_balance_account(request, id):
+    """
+    a view that updates the balance of the selected account
+    """
+    # Incoming values
+    total_wages = Transcation.objects.exclude(status='Planned').filter(account=id, type=1).values_list('value').aggregate(Sum('value'))
+    total_extraincome = Transcation.objects.exclude(status='Planned').filter(account=id, type=3).values_list('value').aggregate(Sum('value'))
+    total_in = total_wages["value__sum"] + total_extraincome["value__sum"]
+
+    # Outgoing values
+    total_expenses = Transcation.objects.exclude(status='Planned').filter(account=id, type=2).values_list('value').aggregate(Sum('value'))
+    total_bills = Transcation.objects.exclude(status='Planned').filter(account=id, type=4).values_list('value').aggregate(Sum('value'))
+    total_out = total_expenses["value__sum"] + total_bills["value__sum"]
+
+    new_balance = total_in - total_out
+
+    account = Account.objects.get(pk=id)
+    account.balance = new_balance
+    account.save()
+
+    return redirect('view_detailed_account', id)
+
 
 def periods_view(request):
     periods = Period.objects.all()
