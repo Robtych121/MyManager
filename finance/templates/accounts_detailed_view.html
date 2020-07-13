@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block page_title %}View Account{% endblock %}
+{% block page_heading%}View Account - {{ account.name }}{% endblock %}
+{% block app_name %}Finance{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <strong>Name : </strong> {{ account.name }}<br>
+                <strong>Description : </strong>{{ account.description }}
+            </div>
+            <div class="col-6">
+                <strong>Balance : </strong>{{ account.balance }}<br>
+                <strong>Currency : </strong>{{ account.currency }}
+            </div>
+        </div>
+    </div>
+  </div>
+  <p>
+    <a class="btn btn-success" href="{% url 'create_or_edit_account' %}" role="button">Update Account Balance</a>
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for transcation in transcations %}
+            <tr>
+                <td>{{ transcation.name }}</td>
+                <td>{{ transcation.value }}</td>
+                <td>{{ transcation.date }}</td>
+                <td>{{ transcation.type }}</td>
+                <td>{{ transcation.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

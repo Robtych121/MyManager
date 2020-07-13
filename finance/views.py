@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Account, Period
+from .models import Account, Period, Transcation
 from .forms import AccountForm
 
 # Create your views here.
@@ -41,6 +41,16 @@ def delete_account(request, id):
 
     return redirect('accounts_view')
 
+
+def view_detailed_account(request, id):
+    """
+    a detailed view of an account showing transcations
+    """
+
+    account = Account.objects.get(pk=id)
+    transcations = Transcation.objects.filter(account=id).order_by('date')
+
+    return render(request, 'accounts_detailed_view.html', {'account': account, 'transcations': transcations})
 
 def periods_view(request):
     periods = Period.objects.all()
