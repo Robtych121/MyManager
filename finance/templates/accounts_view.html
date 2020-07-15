@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ account.name }}</td>
                 <td>{{ account.description }}</td>
-                <td>{{ account.balance }}</td>
+                <td id="acc_balance{{ account.id }}">{{ account.balance }}</td>
                 <td>{{ account.currency }}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -34,8 +34,20 @@
                     </div>
                 </td>
             </tr>
+            <script>
+                $( document ).ready(function() {
+                    $.ajax({
+                       url: "{% url 'accounts_view' %}",
+                       success:function(data){
+                           $('#acc_balance{{ account.id }}').replaceWith($('#acc_balance{{ account.id }}',data));
+                       },
+                  });
+                });  
+                </script>
             {% endfor %}
         </tbody>
     </table>
 </div>
+
+
 {% endblock %}
