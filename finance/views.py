@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Account, Period, Transcation
 from .forms import AccountForm
 from django.db.models import Sum
+from .functions import update_account_bal_from_function
 
 # Create your views here.
 def homepage(request):
@@ -10,6 +11,12 @@ def homepage(request):
 
 def accounts_view(request):
     accounts = Account.objects.all()
+    
+    for account in accounts:
+        acc_id = int(account.id)
+        update_account = Account.objects.get(pk=acc_id)
+        update_account.balance = update_account_bal_from_function(acc_id)
+        update_account.save()
 
     return render(request, 'accounts_view.html', {'accounts': accounts})
 
@@ -58,31 +65,8 @@ def update_balance_account(request, id):
     """
     a view that updates the balance of the selected account
     """
-    # Incoming values
-    total_wages = Transcation.objects.exclude(status='Planned').filter(account=id, type=1).values_list('value').aggregate(Sum('value'))
-    if total_wages["value__sum"] == None:
-        total_wages["value__sum"] = 0
-    total_extraincome = Transcation.objects.exclude(status='Planned').filter(account=id, type=3).values_list('value').aggregate(Sum('value'))
-    if total_extraincome["value__sum"] == None:
-        total_extraincome["value__sum"] = 0
-
-    total_in = total_wages["value__sum"] + total_extraincome["value__sum"]
-
-    # Outgoing values
-    total_expenses = Transcation.objects.exclude(status='Planned').filter(account=id, type=2).values_list('value').aggregate(Sum('value'))
-    if total_expenses["value__sum"] == None:
-        total_expenses["value__sum"] = 0
-
-    total_bills = Transcation.objects.exclude(status='Planned').filter(account=id, type=4).values_list('value').aggregate(Sum('value'))
-    if total_bills["value__sum"] == None:
-        total_bills["value__sum"] = 0
-
-    total_out = total_expenses["value__sum"] + total_bills["value__sum"]
-
-    new_balance = total_in - total_out
-
     account = Account.objects.get(pk=id)
-    account.balance = new_balance
+    account.balance = update_account_bal_from_function(id)
     account.save()
 
     return redirect('view_detailed_account', id)
