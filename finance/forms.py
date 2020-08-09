@@ -11,4 +11,4 @@ class AccountForm(forms.ModelForm):
 class PeriodForm(forms.ModelForm):
     class Meta:
         model = Period
-        fields = ('name', 'startDate', 'endDate')
+        fields = ('name', 'startDate', 'endDate', 'status')
