@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Account, Period, Transcation
-from .forms import AccountForm
+from .forms import AccountForm, PeriodForm
 from django.db.models import Sum
 from .functions import update_account_bal_from_function
 
@@ -76,3 +76,23 @@ def periods_view(request):
     periods = Period.objects.all()
 
     return render(request, 'periods_view.html', {'periods': periods})
+
+
+def create_or_edit_period(request, pk=None):
+    """
+    Create or edit view that allows us to create
+    or edit a period depending if the ID
+    is null or not
+    """
+    period = get_object_or_404(Period, pk=pk) if pk else None
+    if request.method == 'POST':
+        data = request.POST.copy()
+        form = PeriodForm(request.POST, instance=period)
+        if form.is_valid():
+            period = form.save(commit=False)
+            period.status = 'Active'
+            period.save()
+            return redirect('periods_view')
+    else:
+        form = PeriodForm(instance=period)
+    return render(request, 'period_new_form.html', {'form': form})
