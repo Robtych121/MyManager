@@ -96,3 +96,13 @@ def create_or_edit_period(request, pk=None):
     else:
         form = PeriodForm(instance=period)
     return render(request, 'period_new_form.html', {'form': form})
+
+
+def delete_period(request, id):
+    """
+    Deletes the selected period
+    """
+    period = Period.objects.get(pk=id)
+    period.delete()
+
+    return redirect('periods_view')

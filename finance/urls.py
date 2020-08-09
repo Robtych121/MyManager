@@ -1,6 +1,6 @@
 from django.contrib.auth import views
 from django.urls import path
-from .views import homepage, accounts_view, periods_view, create_or_edit_account, delete_account, view_detailed_account, update_balance_account, create_or_edit_period
+from .views import homepage, accounts_view, periods_view, create_or_edit_account, delete_account, view_detailed_account, update_balance_account, create_or_edit_period, delete_period
 
 urlpatterns = [
     path('', homepage, name="financehome"),
@@ -12,4 +12,5 @@ urlpatterns = [
     path('view_detailed_account/<int:id>', view_detailed_account, name="view_detailed_account"),
     path('update_balance_account/<int:id>', update_balance_account, name="update_balance_account"),
     path('create_period/', create_or_edit_period, name="create_or_edit_period"),
+    path('delete_period/<int:id>', delete_period, name="delete_period"),
 ]
