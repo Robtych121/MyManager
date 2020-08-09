@@ -13,4 +13,5 @@ urlpatterns = [
     path('update_balance_account/<int:id>', update_balance_account, name="update_balance_account"),
     path('create_period/', create_or_edit_period, name="create_or_edit_period"),
     path('delete_period/<int:id>', delete_period, name="delete_period"),
+    path('edit_period/<int:pk>', create_or_edit_period, name="create_or_edit_period"),
 ]
