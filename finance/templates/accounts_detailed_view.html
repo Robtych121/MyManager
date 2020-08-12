@@ -22,8 +22,9 @@
   <p>
     <a class="btn btn-success" href="{% url 'update_balance_account' account.id %}" role="button">Update Account Balance</a>
 </p>
+<hr>
 <div class="table-responsive">
-    <table class="table table-bordered">
+    <table id="accountTable" class="table table-bordered">
         <thead>
         <tr>
             <th>Name</th>
@@ -46,4 +47,10 @@
         </tbody>
     </table>
 </div>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready( function () {
+    $('#accountTable').DataTable();
+} );
+</script>
 {% endblock %}
