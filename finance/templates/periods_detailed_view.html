@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block page_title %}View Period{% endblock %}
+{% block page_heading%}View Period - {{ period.name }}{% endblock %}
+{% block app_name %}Finance{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <strong>Start Date : </strong> {{ period.startDate }}<br>
+                <strong>Start Balance : </strong>{{ period.startBalance }}<br>
+                <strong>Total In: </strong>{{ period.totalIn }}<br>
+                <strong>Description : </strong>{{ period.status }}<br>
+                
+            </div>
+            <div class="col-6">
+                <strong>End Date : </strong> {{ period.endDate }}<br>
+                <strong>End Balance : </strong>{{ period.endBalance }}<br>
+                <strong>Total Out: </strong>{{ period.totalOut }}<br>
+                <strong>Free Cash: </strong>{{ period.freeCash }}<br>
+            </div>
+        </div>
+    </div>
+  </div>
+  <p>
+    <a class="btn btn-success" href="#" role="button">Update Totals</a>
+</p>
+<hr>
+<div class="table-responsive">
+    <table id="transTable" class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for transcation in transcations %}
+            <tr>
+                <td>{{ transcation.name }}</td>
+                <td>{{ transcation.value }}</td>
+                <td>{{ transcation.date }}</td>
+                <td>{{ transcation.type }}</td>
+                <td>{{ transcation.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready( function () {
+    $('#transTable').DataTable();
+} );
+</script>
+{% endblock %}

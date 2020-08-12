@@ -30,7 +30,7 @@
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a type="button" href="{% url 'delete_period' period.id %}" class="btn btn-danger">Remove</a>
                         <a type="button" href="{% url 'create_or_edit_period' period.id %}" class="btn btn-info">Edit</a>
-                        <a type="button" href="#" class="btn btn-success">View</a>
+                        <a type="button" href="{% url 'view_detailed_period' period.id %}" class="btn btn-success">View</a>
                     </div>
                 </td>
             </tr>

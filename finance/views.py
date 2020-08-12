@@ -106,3 +106,14 @@ def delete_period(request, id):
     period.delete()
 
     return redirect('periods_view')
+
+
+def view_detailed_period(request, id):
+    """
+    a detailed view of an period showing transcations
+    """
+
+    period = Period.objects.get(pk=id)
+    transcations = Transcation.objects.filter(period=id).order_by('date')
+
+    return render(request, 'periods_detailed_view.html', {'period': period, 'transcations': transcations})
