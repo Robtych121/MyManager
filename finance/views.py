@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Account, Period, Transcation
 from .forms import AccountForm, PeriodForm
 from django.db.models import Sum
-from .functions import update_account_bal_from_function
+from .functions import *
 
 # Create your views here.
 def homepage(request):
@@ -117,3 +117,16 @@ def view_detailed_period(request, id):
     transcations = Transcation.objects.filter(period=id).order_by('date')
 
     return render(request, 'periods_detailed_view.html', {'period': period, 'transcations': transcations})
+
+
+def update_balance_period(request, id):
+    """
+    a view that updates the balance of the selected period
+    """
+    period = Period.objects.get(pk=id)
+    period.totalIn = update_period_totalin_from_function(id)
+    period.totalOut = update_period_totalout_from_function(id)
+    period.freeCash = update_period_bal_from_function(id) + period.startBalance
+    period.save()
+
+    return redirect('view_detailed_period', id)
