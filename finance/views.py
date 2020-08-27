@@ -130,3 +130,9 @@ def update_balance_period(request, id):
     period.save()
 
     return redirect('view_detailed_period', id)
+
+
+def transcations_view(request):
+    transcations = Transcation.objects.all()
+
+    return render(request, 'transcations_view.html', {'transcations': transcations})
