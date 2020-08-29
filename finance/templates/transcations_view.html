@@ -6,13 +6,14 @@
 
 {% block content %}
 <p>
-    <a class="btn btn-success" href="" role="button">Create Transcation</a>
+    <a class="btn btn-success" href="{% url 'create_or_edit_transcation' %}" role="button">Create Transcation</a>
 </p>
 <div class="table-responsive">
     <table id="transTable" class="table table-bordered">
         <thead>
         <tr>
             <th>Name</th>
+            <th>Date</th>
             <th>Value</th>
             <th>Period</th>
             <th>Status</th>
@@ -23,6 +24,7 @@
             {% for transcation in transcations %}
             <tr>
                 <td>{{ transcation.name }}</td>
+                <td>{{ transcation.date }}</td>
                 <td>£{{ transcation.value }}</td>
                 <td>{{ transcation.period }}</td>
                 <td>{{ transcation.status }}</td>
@@ -41,7 +43,10 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 <script>
     $(document).ready( function () {
-    $('#transTable').DataTable();
+
+    $('#transTable').DataTable( {
+    ordering: false
+} );
 } );
 </script>
 {% endblock %}

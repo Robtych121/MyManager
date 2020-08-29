@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Account, Period, Transcation
-from .forms import AccountForm, PeriodForm
+from .forms import AccountForm, PeriodForm, TranscationForm
 from django.db.models import Sum
 from .functions import *
 
@@ -133,6 +133,25 @@ def update_balance_period(request, id):
 
 
 def transcations_view(request):
-    transcations = Transcation.objects.all()
+    transcations = Transcation.objects.all().order_by('-date')
 
     return render(request, 'transcations_view.html', {'transcations': transcations})
+
+
+def create_or_edit_transcation(request, pk=None):
+    """
+    Create or edit view that allows us to create
+    or edit a transcation depending if the ID
+    is null or not
+    """
+    transcation = get_object_or_404(Transcation, pk=pk) if pk else None
+    if request.method == 'POST':
+        data = request.POST.copy()
+        form = TranscationForm(request.POST, instance=transcation)
+        if form.is_valid():
+            transcation = form.save(commit=False)
+            transcation.save()
+            return redirect('transcations_view')
+    else:
+        form = TranscationForm(instance=transcation)
+    return render(request, 'transcation_new_form.html', {'form': form})
