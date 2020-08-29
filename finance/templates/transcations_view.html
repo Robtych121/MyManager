@@ -9,7 +9,7 @@
     <a class="btn btn-success" href="" role="button">Create Transcation</a>
 </p>
 <div class="table-responsive">
-    <table class="table table-bordered">
+    <table id="transTable" class="table table-bordered">
         <thead>
         <tr>
             <th>Name</th>
@@ -38,4 +38,10 @@
         </tbody>
     </table>
 </div>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready( function () {
+    $('#transTable').DataTable();
+} );
+</script>
 {% endblock %}
