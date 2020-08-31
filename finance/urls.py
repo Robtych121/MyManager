@@ -18,4 +18,5 @@ urlpatterns = [
     path('update_balance_period/<int:id>', update_balance_period, name="update_balance_period"),
     path('transcations_view/', transcations_view, name="transcations_view"),
     path('create_transcation/', create_or_edit_transcation, name="create_or_edit_transcation"),
+    path('edit_transcation/<int:pk>', create_or_edit_transcation, name="create_or_edit_transcation"),
 ]
