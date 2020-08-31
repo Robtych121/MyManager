@@ -155,3 +155,23 @@ def create_or_edit_transcation(request, pk=None):
     else:
         form = TranscationForm(instance=transcation)
     return render(request, 'transcation_new_form.html', {'form': form})
+
+
+def delete_transcation(request, id):
+    """
+    Deletes the selected transcation
+    """
+    transcation = Transcation.objects.get(pk=id)
+    transcation.delete()
+
+    return redirect('transcations_view')
+
+
+def view_detailed_transcation(request, id):
+    """
+    a detailed view of an transcation
+    """
+
+    transcation = Transcation.objects.get(pk=id)
+
+    return render(request, 'transcations_detailed_view.html', {'transcation': transcation})

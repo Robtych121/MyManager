@@ -1,6 +1,6 @@
 from django.contrib.auth import views
 from django.urls import path
-from .views import homepage, accounts_view, periods_view, create_or_edit_account, delete_account, view_detailed_account, update_balance_account, create_or_edit_period, delete_period, view_detailed_period, update_balance_period, transcations_view, create_or_edit_transcation
+from .views import homepage, accounts_view, periods_view, create_or_edit_account, delete_account, view_detailed_account, update_balance_account, create_or_edit_period, delete_period, view_detailed_period, update_balance_period, transcations_view, create_or_edit_transcation, delete_transcation, view_detailed_transcation
 
 urlpatterns = [
     path('', homepage, name="financehome"),
@@ -19,4 +19,6 @@ urlpatterns = [
     path('transcations_view/', transcations_view, name="transcations_view"),
     path('create_transcation/', create_or_edit_transcation, name="create_or_edit_transcation"),
     path('edit_transcation/<int:pk>', create_or_edit_transcation, name="create_or_edit_transcation"),
+    path('delete_transcation/<int:id>', delete_transcation, name="delete_transcation"),
+    path('view_detailed_transcation/<int:id>', view_detailed_transcation, name="view_detailed_transcation"),
 ]

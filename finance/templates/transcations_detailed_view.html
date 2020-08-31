@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block page_title %}View Transcation{% endblock %}
+{% block page_heading%}View Transcation - {{ transcation.name }}{% endblock %}
+{% block app_name %}Finance{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <strong>Value : </strong> {{ transcation.value }}<br>
+                <strong>Period : </strong>{{ transcation.period }}<br>
+                <strong>Category: </strong>{{ transcation.category }}<br>
+                <strong>Status : </strong>{{ transcation.status }}<br>
+                
+            </div>
+            <div class="col-6">
+                <strong>Date : </strong> {{ transcation.date }}<br>
+                <strong>Account : </strong>{{ transcation.account }}<br>
+                <strong>Type: </strong>{{ transcation.type }}<br>
+                <strong>Notes: </strong>{{ transcation.notes }}<br>
+            </div>
+        </div>
+    </div>
+  </div>
+  <a class="btn btn-danger" onclick="window.history.go(-1);">Back</a>
+{% endblock %}
