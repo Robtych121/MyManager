@@ -17,4 +17,4 @@ class PeriodForm(forms.ModelForm):
 class TranscationForm(forms.ModelForm):
     class Meta:
         model = Transcation
-        fields = ('account', 'period', 'name', 'value', 'category', 'type', 'status', 'notes')
+        fields = ('account', 'period', 'name', 'date', 'value', 'category', 'type', 'status', 'notes')
