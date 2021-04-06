@@ -11,7 +11,7 @@ coverage==5.0.3
 dj-database-url==0.5.0
 Django==3.0.7
 django-forms-bootstrap==3.1.0
-django-registration==3.1
+django-registration==3.1.2
 django-storages==1.9.1
 dnspython==1.16.0
 docutils==0.15.2
